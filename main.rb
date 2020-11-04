@@ -27,4 +27,4 @@ def run
   restart
 end
 
-run(&one_minute)
+run
