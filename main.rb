@@ -1,5 +1,13 @@
+# TODO [] Break modules out into seperate loadable files.
+# TODO [] Refactor names and add start function in Runtime module.
+module Linker
+  include Logger UserInput Runtime ControllerInterface MusicSpecific
+end
+
 module Logger
+
   include Linker
+  
   def start_log
     puts "If you would like to loop infinitly type I and hit enter."
     puts "If you would like to loop infinitly in one minute intervals type IONE and hit enter."
@@ -30,7 +38,9 @@ module Logger
 end
 
 module UserInput
+
   include Linker
+
   def get_input 
     option = gets
     option.chomp.downcase
@@ -44,7 +54,9 @@ module UserInput
 end
 
 module Runtime
+
   include Linker
+
   def restart
     clear_log
     restart_log
@@ -59,7 +71,9 @@ module Runtime
 end
 
 module ControllerInterface
+
   include Linker
+
   def run_infinite
     loop do
       call_note
@@ -99,7 +113,9 @@ end
 
 
 module MusicSpecific
+
   include Linker
+
   def call_note
     cs  = %w[A A# B C C# D D# E F F# G G#]
     puts cs.sample
@@ -110,12 +126,11 @@ module MusicSpecific
   end
 end
 
-module Linker
-  include Logger UserInput Runtime ControllerInterface MusicSpecific
-end
 
 module Run
+
   include Linker
+
   def call
     ask_user_for_input
   end
